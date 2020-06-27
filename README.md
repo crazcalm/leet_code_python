@@ -7,4 +7,4 @@ Note: I am using Python 3.8
     pre-commit install
 
 ## Run tests:
-    python -m unittest
+    python -m unittest discover -p *_test.py
