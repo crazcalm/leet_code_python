@@ -24,7 +24,7 @@ class ListNode:
 
 class Solution:
     def get_number(self, list_node: ListNode) -> str:
-        if list_node.next:
+        if list_node.next is None:
             return list_node.val
         else:
             return str(self.get_number(list_node.next)) + str(list_node.val)
