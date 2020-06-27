@@ -24,12 +24,7 @@ class TestAddTwoNumbers(unittest.TestCase):
                 )
                 expected = test_case.expected
 
-                current_node = expected
-                current_result_node = result
-                while current_node:
-                    self.assertEqual(current_node.val, current_result_node.val)
-                    current_node = current_node.next
-                    current_result_node = current_result_node.next
+                self.assertEqual(result, expected)
 
     def test_get_num(self):
         test_case = ListNode(2, ListNode(4, ListNode(3)))
@@ -42,12 +37,23 @@ class TestAddTwoNumbers(unittest.TestCase):
         result = Solution().make_list_node(test_case)
         expected = ListNode(2, ListNode(4, ListNode(3)))
 
-        current_node = expected
-        current_result_node = result
-        while current_node:
-            self.assertEqual(current_node.val, current_result_node.val)
-            current_node = current_node.next
-            current_result_node = current_result_node.next
+        self.assertEqual(result, expected)
+
+    def test__eq__(self):
+        Case = namedtuple("data", "l1, l2, expected")
+        cases = [
+            Case(ListNode(0), ListNode(0), True),
+            Case(ListNode(0), ListNode(1), False),
+            Case(ListNode(0, ListNode(1)), ListNode(0, ListNode(1)), True),
+            Case(ListNode(0, ListNode(1)), ListNode(0), False),
+            Case(ListNode(0, ListNode(1)), ListNode(0, ListNode(1)), True),
+            Case(ListNode(0), ListNode(0, ListNode(1)), False),
+        ]
+
+        for num, case in enumerate(cases, start=1):
+            with self.subTest(msg=f"Case num {num}"):
+                result = case.l1 == case.l2
+                self.assertEqual(result, case.expected)
 
 
 if "__main__" == __name__:

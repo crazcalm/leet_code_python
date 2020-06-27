@@ -21,6 +21,29 @@ class ListNode:
         self.val = val
         self.next = next
 
+    def __eq__(self, other) -> bool:
+        result = True
+        current_node = self
+        current_other_node = other
+
+        while current_node is not None:
+            if current_other_node is None:
+                result = False
+                break
+
+            elif current_node.val != current_other_node.val:
+                result = False
+                break
+
+            current_node = current_node.next
+            current_other_node = current_other_node.next
+
+        if current_node is None:
+            if current_other_node is not None:
+                result = False
+
+        return result
+
 
 class Solution:
     def get_number(self, list_node: ListNode) -> str:
